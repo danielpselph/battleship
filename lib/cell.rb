@@ -18,6 +18,15 @@ class Cell
   end
 
   def fired_upon?
-    false
+    if @ship.health != @ship.length
+      true
+    else
+      false
+    end
   end
+
+  def fire_upon
+    @ship.hit
+  end
+
 end

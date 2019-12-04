@@ -23,7 +23,15 @@ class CellTest < Minitest::Test
   end
 
   def test_it_has_been_fired_upon
+    # require "pry"; binding.pry
+    @cell.place_ship(@cruiser)
+
     assert_equal false, @cell.fired_upon?
+
+
+    @cell.fire_upon
+    assert_equal 2, @cell.ship.health
+    assert_equal true, @cell.fired_upon?
   end
 
 end
