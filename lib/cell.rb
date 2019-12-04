@@ -29,4 +29,8 @@ class Cell
     @ship.hit
   end
 
+  def render
+    "."
+  end
+
 end
