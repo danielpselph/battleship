@@ -26,7 +26,6 @@ class CellTest < Minitest::Test
   end
 
   def test_cell_has_been_fired_upon
-    # skip
     @cell.place_ship(@cruiser)
     assert_equal false, @cell.fired_upon?
     @cell.fire_upon
