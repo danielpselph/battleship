@@ -1,4 +1,5 @@
 class Board
+
   attr_reader :cells
 
   def initialize
@@ -22,6 +23,8 @@ class Board
     }
   end
 
-
+  def validate_coordinate?(coordinate)
+    @cells.has_key?(coordinate)
+  end
 
 end
