@@ -8,6 +8,8 @@ class CellTest < Minitest::Test
   def setup
     @cell = Cell.new("B4")
     @cruiser = Ship.new("Cruiser", 3)
+    @cell_1 = Cell.new("B4")
+
   end
 
   def test_it_has_attributes
@@ -18,6 +20,7 @@ class CellTest < Minitest::Test
 
   def test_it_can_place_a_ship
     @cell.place_ship(@cruiser)
+    # require "pry"; binding.pry
     assert_equal @cruiser, @cell.ship
     assert_equal false, @cell.empty?
   end
@@ -29,13 +32,12 @@ class CellTest < Minitest::Test
     assert_equal 2, @cell.ship.health
     assert_equal true, @cell.fired_upon?
   end
-
+  #
   def test_cell_can_render
-    cell_1 = Cell.new("B4")
-    assert_equal ".", cell_1.render
-
-    cell_1.fire_upon
-    assert_equal "M", cell_1.render
+    assert_equal ".", @cell_1.render
   end
+  #   cell_1.fire_upon
+  #   assert_equal "M", cell_1.render
+  # end
 
 end
