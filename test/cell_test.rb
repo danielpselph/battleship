@@ -26,6 +26,7 @@ class CellTest < Minitest::Test
   end
 
   def test_it_has_been_fired_upon
+    # skip
     @cell.place_ship(@cruiser)
     assert_equal false, @cell.fired_upon?
     @cell.fire_upon
@@ -34,10 +35,11 @@ class CellTest < Minitest::Test
   end
   #
   def test_cell_can_render
+    skip
     assert_equal ".", @cell_1.render
   end
-  #   cell_1.fire_upon
-  #   assert_equal "M", cell_1.render
-  # end
+    cell_1.fire_upon
+    assert_equal "M", cell_1.render
+  end
 
 end
