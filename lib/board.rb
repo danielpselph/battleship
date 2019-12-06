@@ -6,7 +6,7 @@ class Board
     @cells = {
       "A1" => Cell.new("A1"),
       "A2" => Cell.new("A2"),
-      "A2" => Cell.new("A3"),
+      "A3" => Cell.new("A3"),
       "A4" => Cell.new("A4"),
       "B1" => Cell.new("B1"),
       "B2" => Cell.new("B2"),
@@ -24,7 +24,16 @@ class Board
   end
 
   def validate_coordinate?(coordinate)
+    # require "pry"; binding.pry
     @cells.has_key?(coordinate)
   end
 
+  def valid_placement?(ship, coordinate)
+    ship.length == coordinate.length
+    # require "pry"; binding.pry
+  end
+
 end
+
+#place_ship method
+#separate letters and numbers
