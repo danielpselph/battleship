@@ -1,8 +1,10 @@
 class Board
 
-  attr_reader :cells
+  attr_reader :cells, :x_axis, :y_axis
 
   def initialize
+    @x_axis = ("A".."D").to_a
+    @y_axis = (1..4).to_a
     @cells = {
       "A1" => Cell.new("A1"),
       "A2" => Cell.new("A2"),
@@ -24,16 +26,45 @@ class Board
   end
 
   def validate_coordinate?(coordinate)
-    # require "pry"; binding.pry
     @cells.has_key?(coordinate)
   end
 
   def valid_placement?(ship, coordinate)
-    ship.length == coordinate.length
-    # require "pry"; binding.pry
+    return false if ship.length != coordinate.length
+    x = []
+    y = []
+    z = 1
+    coordinate.each do |val|
+      x << val.split(//)[0]
+      y << (val.split(//)[1]).to_i
+    end
+
+    require "pry"; binding.pry
   end
 
-end
 
-#place_ship method
-#separate letters and numbers
+
+end
+  #
+  # def validate_vertical_consecutive(coordinate)
+  #   y = []
+  #   coordinate.each do |num|
+  #   y << num.split(//)[1]
+  #   end
+  # end
+  #
+  # def validate_horizontal_consecutive
+  #   x = []
+  #   coordinate.each do |let|
+  #   x << let.split(//)[0]
+  #   end
+  #   # x.uniq.length == 1
+  # end
+
+
+# x = []
+# y = []
+# coordinate.each do |axis|
+#   y << coordinate.join.split(//)
+#   x << coordinate.join.split(//)
+# end
