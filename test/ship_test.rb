@@ -30,6 +30,9 @@ class ShipTest < Minitest::Test
     assert_equal false, @cruiser.sunk?
     @cruiser.hit
     assert_equal true, @cruiser.sunk?
+    @cruiser.hit
+    assert_equal true, @cruiser.sunk?
+    #split hit and sunk
   end
 
 end
