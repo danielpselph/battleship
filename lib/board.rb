@@ -21,6 +21,7 @@ class Board
       "D3" => Cell.new("D3"),
       "D4" => Cell.new("D4")
     }
+    # require "pry"; binding.pry
   end
 
   def validate_coordinate?(coordinate)
@@ -29,7 +30,7 @@ class Board
 
   def valid_placement?(ship, coordinate) #change x and y to longer name
     return false if coordinate.length != ship.length
-    return false if over_lapping?(coordinate) == false 
+    return false if over_lapping?(coordinate) == false
     x = []
     y = []
     coordinate.each do |val|
@@ -97,7 +98,6 @@ class Board
         # unless @cells[coordinate].empty? == false
         # end
       end
-      # over_lapping?(coordinate)
     end
   end
 
@@ -106,6 +106,28 @@ class Board
       return false if @cells[coord].empty? == false
     end
   end
+
+  def render(show_ship = false)
+    "  1 2 3 4 \n" +
+    "A #{@cells["A1"].render(show_ship)} #{@cells["A2"].render(show_ship)} #{@cells["A3"].render(show_ship)} #{@cells["A4"].render(show_ship)} \n" +
+    "B #{@cells["B1"].render(show_ship)} #{@cells["B2"].render(show_ship)} #{@cells["B3"].render(show_ship)} #{@cells["B4"].render(show_ship)} \n" +
+    "C #{@cells["C1"].render(show_ship)} #{@cells["C2"].render(show_ship)} #{@cells["C3"].render(show_ship)} #{@cells["C4"].render(show_ship)} \n" +
+    "D #{@cells["D1"].render(show_ship)} #{@cells["D2"].render(show_ship)} #{@cells["D3"].render(show_ship)} #{@cells["D4"].render(show_ship)} \n"
+  end
+
+     # "  1 2 3 4 \n" +
+     # "A . . . . \n" +
+     # "B . . . . \n" +
+     # "C . . . . \n" +
+     # "D . . . . \n"
+     # return "S" if show_ship == true && empty? == false
+     # return "M" if fired_upon? == true && empty? == true
+     # return "H" if fired_upon? == true && empty? == false && @ship.health >= 1
+     # return "X" if fired_upon? == true && empty? == false && @ship.health == 0
+     # "."
+    # require "pry"; binding.pry
+
+
 end
 #BUILD y.each AND x.each INTO SEPARATE METHODS, AND CALL THEM IN .valid_placement?
 #   def validate_y
