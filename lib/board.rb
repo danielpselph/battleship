@@ -36,20 +36,74 @@ class Board
       y << (val.split(//)[1]).to_i
     end
 
-#BUILD y.each AND x.each INTO SEPARATE METHODS, AND CALL THEM IN .valid_placement?
-    y.each_cons(2) do |num|
-      if num[1][1] - num[0][1] != 1
-        return false
-      end
+    if valid_x(x) == true && valid_y(y) == true
+      false
+    elsif hor_x(x) == true && valid_y(y) == true || valid_x(x) == true && vert_y(y) == true
       true
+    else
+      false
     end
+    # valid_y(y)
+    # valid_x(x)
+    # vert_y(y)
+    # hor_x(x)
 
-    # require "pry"; binding.pry
-    x.each_cons(2) do |let|
-      if let[1][0].ord - let[0][0].ord != 1
-        return false
+  end
+
+  def valid_y(y)
+      y.each_cons(2).all? do |x, y|
+        if x == y - 1
+          true
+        else
+          false
+        end
       end
-    end
+  end
+
+  def valid_x(x)
+      x.each_cons(2).all? do |x, y|
+        if x.ord == y.ord - 1
+          true
+        else
+          false
+        end
+      end
+  end
+
+  def hor_x(x)
+    if x.each {|let| let.ord == let.ord}
       true
+    else
+      false
     end
   end
+
+  def vert_y(y)
+    if y.each {|num| num == num}
+      true
+    else
+      false
+    end
+  end
+end
+#BUILD y.each AND x.each INTO SEPARATE METHODS, AND CALL THEM IN .valid_placement?
+#   def validate_y
+#     y.each_cons(2) do |num|
+#       if num[1][1] - num[0][1] != 1
+#         return false
+#         require "pry"; binding.pry
+#
+#       end
+#       true
+#     end
+#   end
+#
+#   def validate_x
+#     x.each_cons(2) do |let|
+#       if let[1][0].ord - let[0][0].ord != 1
+#         return false
+#       end
+#     end
+#       true
+#   end
+# end
