@@ -55,7 +55,12 @@ class BoardTest < Minitest::Test
     cell_1.ship
     cell_2.ship
     cell_3.ship
-    require "pry"; binding.pry
+    # require "pry"; binding.pry
     assert_equal true, cell_3.ship == cell_2.ship
+  end
+
+  def test_ships_do_not_overlap
+    @board.place(@cruiser, ["A1", "A2", "A3"])
+    assert_equal false, @board.valid_placement?(@submarine, ["A1", "B1"])
   end
 end
