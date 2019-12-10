@@ -85,6 +85,14 @@ class Board
       false
     end
   end
+
+  def place(ship, coordinate) #need ship and coord arguments
+    if valid_placement?(ship, coordinate)
+      coordinate.each do |coord|
+        @cells[coord].place_ship(ship)
+      end
+    end
+  end
 end
 #BUILD y.each AND x.each INTO SEPARATE METHODS, AND CALL THEM IN .valid_placement?
 #   def validate_y
