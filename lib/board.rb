@@ -27,17 +27,21 @@ class Board
     @cells.has_key?(coordinate)
   end
 
-  def valid_placement?(ship, coordinate)
+  def valid_placement?(ship, coordinate) #change x and y to longer name
     return false if coordinate.length != ship.length
+    return false if over_lapping?(coordinate) == false 
     x = []
     y = []
     coordinate.each do |val|
       x << val.split(//)[0]
       y << (val.split(//)[1]).to_i
     end
-
+    #require "pry"; binding.pry
+    #return false if over_lapping?(coordinate)# || @cells.empty? == false
     if valid_x(x) == true && valid_y(y) == true
       false
+    # elsif @cells.empty? == false
+    #   false
     elsif hor_x(x) == true && valid_y(y) == true || valid_x(x) == true && vert_y(y) == true
       true
     else
@@ -52,9 +56,9 @@ class Board
 
   def valid_y(y)
       y.each_cons(2).all? do |x, y|
-        if x == y - 1
+        if x == y - 1#return true if
           true
-        else
+        else #dont need else false
           false
         end
       end
@@ -89,8 +93,17 @@ class Board
   def place(ship, coordinate) #need ship and coord arguments
     if valid_placement?(ship, coordinate)
       coordinate.each do |coord|
-        @cells[coord].place_ship(ship)
+          @cells[coord].place_ship(ship)
+        # unless @cells[coordinate].empty? == false
+        # end
       end
+      # over_lapping?(coordinate)
+    end
+  end
+
+  def over_lapping?(coordinate)
+    coordinate.each do |coord|
+      return false if @cells[coord].empty? == false
     end
   end
 end
