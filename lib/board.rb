@@ -36,12 +36,11 @@ class Board
       y << (val.split(//)[1]).to_i
     end
 
-
     if valid_x(x) == true && valid_y(y) == true
       false
     elsif hor_x(x) == true && valid_y(y) == true || valid_x(x) == true && vert_y(y) == true
       true
-    elsif
+    else
       false
     end
     # valid_y(y)
