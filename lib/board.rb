@@ -21,23 +21,28 @@ class Board
       "D3" => Cell.new("D3"),
       "D4" => Cell.new("D4")
     }
+    # require "pry"; binding.pry
   end
 
   def validate_coordinate?(coordinate)
     @cells.has_key?(coordinate)
   end
 
-  def valid_placement?(ship, coordinate)
+  def valid_placement?(ship, coordinate) #change x and y to longer name
     return false if coordinate.length != ship.length
+    return false if over_lapping?(coordinate) == false
     x = []
     y = []
     coordinate.each do |val|
       x << val.split(//)[0]
       y << (val.split(//)[1]).to_i
     end
-
+    #require "pry"; binding.pry
+    #return false if over_lapping?(coordinate)# || @cells.empty? == false
     if valid_x(x) == true && valid_y(y) == true
       false
+    # elsif @cells.empty? == false
+    #   false
     elsif hor_x(x) == true && valid_y(y) == true || valid_x(x) == true && vert_y(y) == true
       true
     else
@@ -52,9 +57,9 @@ class Board
 
   def valid_y(y)
       y.each_cons(2).all? do |x, y|
-        if x == y - 1
+        if x == y - 1#return true if
           true
-        else
+        else #dont need else false
           false
         end
       end
@@ -85,6 +90,44 @@ class Board
       false
     end
   end
+
+  def place(ship, coordinate) #need ship and coord arguments
+    if valid_placement?(ship, coordinate)
+      coordinate.each do |coord|
+          @cells[coord].place_ship(ship)
+        # unless @cells[coordinate].empty? == false
+        # end
+      end
+    end
+  end
+
+  def over_lapping?(coordinate)
+    coordinate.each do |coord|
+      return false if @cells[coord].empty? == false
+    end
+  end
+
+  def render(show_ship = false)
+    "  1 2 3 4 \n" +
+    "A #{@cells["A1"].render(show_ship)} #{@cells["A2"].render(show_ship)} #{@cells["A3"].render(show_ship)} #{@cells["A4"].render(show_ship)} \n" +
+    "B #{@cells["B1"].render(show_ship)} #{@cells["B2"].render(show_ship)} #{@cells["B3"].render(show_ship)} #{@cells["B4"].render(show_ship)} \n" +
+    "C #{@cells["C1"].render(show_ship)} #{@cells["C2"].render(show_ship)} #{@cells["C3"].render(show_ship)} #{@cells["C4"].render(show_ship)} \n" +
+    "D #{@cells["D1"].render(show_ship)} #{@cells["D2"].render(show_ship)} #{@cells["D3"].render(show_ship)} #{@cells["D4"].render(show_ship)} \n"
+  end
+
+     # "  1 2 3 4 \n" +
+     # "A . . . . \n" +
+     # "B . . . . \n" +
+     # "C . . . . \n" +
+     # "D . . . . \n"
+     # return "S" if show_ship == true && empty? == false
+     # return "M" if fired_upon? == true && empty? == true
+     # return "H" if fired_upon? == true && empty? == false && @ship.health >= 1
+     # return "X" if fired_upon? == true && empty? == false && @ship.health == 0
+     # "."
+    # require "pry"; binding.pry
+
+
 end
 #BUILD y.each AND x.each INTO SEPARATE METHODS, AND CALL THEM IN .valid_placement?
 #   def validate_y
