@@ -7,6 +7,16 @@ require_relative 'computer'
 
 class Game
 
+    attr_reader :player,
+                :computer,
+                :player_board,
+                :computer_board,
+                :player_cruiser,
+                :player_sumbmarine,
+                :computer_board,
+                :computer_cruiser,
+                :computer_submarine
+
   def initialize
     @player = Player.new
     @computer = Computer.new
