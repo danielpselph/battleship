@@ -29,46 +29,46 @@ class Board
   def valid_placement?(ship, coordinate)
     return false if coordinate.length != ship.length
     return false if over_lapping?(coordinate) == false
-    x = []
-    y = []
+    x_axis = []
+    y_axis = []
     coordinate.each do |val|
-      x << val.split(//)[0]
-      y << (val.split(//)[1]).to_i
+      x_axis << val.split(//)[0]
+      y_axis << (val.split(//)[1]).to_i
     end
 
-    if valid_x(x) == true && valid_y(y) == true
+    if valid_x(x_axis) == true && valid_y(y_axis) == true
       false
-    elsif hor_x(x) == true && valid_y(y) == true || valid_x(x) == true && vert_y(y) == true
+    elsif hor_x(x_axis) == true && valid_y(y_axis) == true || valid_x(x_axis) == true && vert_y(y_axis) == true
       true
     else
       false
     end
   end
 
-  def valid_y(y)
-      y.each_cons(2).all? do |x, y|
-        if x == y - 1
-          true
-        end
+  def valid_y(y_axis)
+    y_axis.each_cons(2).all? do |x, y|
+      if x == y - 1
+        true
       end
+    end
   end
 
-  def valid_x(x)
-      x.each_cons(2).all? do |x, y|
-        if x.ord == y.ord - 1
-          true
-        end
+  def valid_x(x_axis)
+    x_axis.each_cons(2).all? do |x, y|
+      if x.ord == y.ord - 1
+        true
       end
+    end
   end
 
-  def hor_x(x)
-    if x.each {|let| let.ord == let.ord}
+  def hor_x(x_axis)
+    if x_axis.each {|let| let.ord == let.ord}
       true
     end
   end
 
-  def vert_y(y)
-    if y.each {|num| num == num}
+  def vert_y(y_axis)
+    if y_axis.each {|num| num == num}
       true
     end
   end
@@ -76,8 +76,9 @@ class Board
   def place(ship, coordinate)
     if valid_placement?(ship, coordinate)
       coordinate.each do |coord|
-          @cells[coord].place_ship(ship)
+        @cells[coord].place_ship(ship)
       end
+      require "pry"; binding.pry
     end
   end
 
