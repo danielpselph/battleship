@@ -7,6 +7,16 @@ require_relative 'computer'
 
 class Game
 
+    attr_reader :player,
+                :computer,
+                :player_board,
+                :computer_board,
+                :player_cruiser,
+                :player_sumbmarine,
+                :computer_board,
+                :computer_cruiser,
+                :computer_submarine
+
   def initialize
     @player = Player.new
     @computer = Computer.new
@@ -28,12 +38,11 @@ class Game
   def main_menu
     puts "Welcome to BATTLESHIP!"
     puts "Enter p to play. Enter q to quit."
-    #if statement to either start game or quit
+
     play = gets.chomp
       if play.downcase == "p"
         setup
       else play.downcase == "q"
-        #quit game
       end
   end
 
@@ -73,9 +82,30 @@ class Game
     #return to start method
   end
 
-  def create_comp_ship_and_board
-
+  def place_comp_ships
+    comp_sample = @computer_board.cells.keys.sample(@computer_cruiser.length)
+    until @computer_board.valid_placement?(@computer_cruiser, comp_sample) do
+      @computer_board.cells.keys.sample(@computer_cruiser.length)
+      #computer place method
+    else
+      place_comp_ships
+    end
   end
+
+  # def place_comp_ships
+  #   set_coordinates = []
+  #   if @computer_board.valid_placement?(ship, coordinates)
+  #     @computer_board.place_ship(ship, coordinates)
+  #   else
+  #     set_coordinates = @computer_board.cells.keys.sample(ship.length)
+  #     until @computer_board.valid_placement?(ship, coordinates)
+  #       set_coordinates = @computer_board.cells.keys.sample(ship.length)
+  #     end
+  #   end
+  #   @computer_board.place_ship(ship, coordinates)
+  #   require "pry"; binding.pry
+  # end
+
 
   def turn
     #display computer board
@@ -113,6 +143,4 @@ class Game
     puts "I won"
     #exit program
   end
-
-
 end
