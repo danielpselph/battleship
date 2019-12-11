@@ -47,8 +47,8 @@ class Game
   # end
 
   def setup
-    @computer_board.place(@computer_cruiser)
-    @computer_board.render
+    # @computer_board.place(@computer_cruiser)
+    # @computer_board.render
     #setup computer board
       #place random ships for computer
       #need to write random placement method
@@ -71,6 +71,10 @@ class Game
     #error message if not valid
     puts "Those are invalid coordinates. Please try again:"
     #return to start method
+  end
+
+  def create_comp_ship_and_board
+
   end
 
   def turn

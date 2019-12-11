@@ -20,6 +20,7 @@ class Board
       "D3" => Cell.new("D3"),
       "D4" => Cell.new("D4")
     }
+    require "pry"; binding.pry
   end
 
   def validate_coordinate?(coordinate)
