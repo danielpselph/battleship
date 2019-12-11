@@ -1,5 +1,4 @@
 class Board
-
   attr_reader :cells
 
   def initialize
@@ -21,83 +20,65 @@ class Board
       "D3" => Cell.new("D3"),
       "D4" => Cell.new("D4")
     }
-    # require "pry"; binding.pry
   end
 
   def validate_coordinate?(coordinate)
     @cells.has_key?(coordinate)
   end
 
-  def valid_placement?(ship, coordinate) #change x and y to longer name
+  def valid_placement?(ship, coordinate)
     return false if coordinate.length != ship.length
     return false if over_lapping?(coordinate) == false
-    x = []
-    y = []
+    x_axis = []
+    y_axis = []
     coordinate.each do |val|
-      x << val.split(//)[0]
-      y << (val.split(//)[1]).to_i
+      x_axis << val.split(//)[0]
+      y_axis << (val.split(//)[1]).to_i
     end
-    #require "pry"; binding.pry
-    #return false if over_lapping?(coordinate)# || @cells.empty? == false
-    if valid_x(x) == true && valid_y(y) == true
+
+    if valid_x(x_axis) == true && valid_y(y_axis) == true
       false
-    # elsif @cells.empty? == false
-    #   false
-    elsif hor_x(x) == true && valid_y(y) == true || valid_x(x) == true && vert_y(y) == true
+    elsif hor_x(x_axis) == true && valid_y(y_axis) == true || valid_x(x_axis) == true && vert_y(y_axis) == true
       true
     else
       false
     end
-    # valid_y(y)
-    # valid_x(x)
-    # vert_y(y)
-    # hor_x(x)
-
   end
 
-  def valid_y(y)
-      y.each_cons(2).all? do |x, y|
-        if x == y - 1#return true if
-          true
-        else #dont need else false
-          false
-        end
+  def valid_y(y_axis)
+    y_axis.each_cons(2).all? do |x, y|
+      if x == y - 1
+        true
       end
+    end
   end
 
-  def valid_x(x)
-      x.each_cons(2).all? do |x, y|
-        if x.ord == y.ord - 1
-          true
-        else
-          false
-        end
+  def valid_x(x_axis)
+    x_axis.each_cons(2).all? do |x, y|
+      if x.ord == y.ord - 1
+        true
       end
-  end
-
-  def hor_x(x)
-    if x.each {|let| let.ord == let.ord}
-      true
-    else
-      false
     end
   end
 
-  def vert_y(y)
-    if y.each {|num| num == num}
+  def hor_x(x_axis)
+    if x_axis.each {|let| let.ord == let.ord}
       true
-    else
-      false
     end
   end
 
-  def place(ship, coordinate) #need ship and coord arguments
+  def vert_y(y_axis)
+    if y_axis.each {|num| num == num}
+      true
+    end
+  end
+
+  def place(ship, coordinate)
     if valid_placement?(ship, coordinate)
       coordinate.each do |coord|
-          @cells[coord].place_ship(ship)
-        # unless @cells[coordinate].empty? == false
-        # end
+        @cells[coord].place_ship(ship)
       end
+      require "pry"; binding.pry
     end
   end
 
@@ -114,39 +95,4 @@ class Board
     "C #{@cells["C1"].render(show_ship)} #{@cells["C2"].render(show_ship)} #{@cells["C3"].render(show_ship)} #{@cells["C4"].render(show_ship)} \n" +
     "D #{@cells["D1"].render(show_ship)} #{@cells["D2"].render(show_ship)} #{@cells["D3"].render(show_ship)} #{@cells["D4"].render(show_ship)} \n"
   end
-
-     # "  1 2 3 4 \n" +
-     # "A . . . . \n" +
-     # "B . . . . \n" +
-     # "C . . . . \n" +
-     # "D . . . . \n"
-     # return "S" if show_ship == true && empty? == false
-     # return "M" if fired_upon? == true && empty? == true
-     # return "H" if fired_upon? == true && empty? == false && @ship.health >= 1
-     # return "X" if fired_upon? == true && empty? == false && @ship.health == 0
-     # "."
-    # require "pry"; binding.pry
-
-
 end
-#BUILD y.each AND x.each INTO SEPARATE METHODS, AND CALL THEM IN .valid_placement?
-#   def validate_y
-#     y.each_cons(2) do |num|
-#       if num[1][1] - num[0][1] != 1
-#         return false
-#         require "pry"; binding.pry
-#
-#       end
-#       true
-#     end
-#   end
-#
-#   def validate_x
-#     x.each_cons(2) do |let|
-#       if let[1][0].ord - let[0][0].ord != 1
-#         return false
-#       end
-#     end
-#       true
-#   end
-# end

@@ -35,6 +35,4 @@ class Cell
     return "X" if fired_upon? == true && empty? == false && @ship.health == 0
     "."
   end
-
-
 end
