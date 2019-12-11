@@ -12,7 +12,7 @@ class Game
     @computer = Computer.new
     @player_board = Board.new
     @player_cruiser = Ship.new("cruiser", 3)
-    @player_sumbmarine = Ship.new("submarine", 2)
+    @player_submarine = Ship.new("submarine", 2)
     @computer_board = Board.new
     @computer_cruiser = Ship.new("cruiser", 3)
     @computer_submarine = Ship.new("submarine", 2)
@@ -47,6 +47,8 @@ class Game
   # end
 
   def setup
+    @computer_board.place(@computer_cruiser)
+    @computer_board.render
     #setup computer board
       #place random ships for computer
       #need to write random placement method
