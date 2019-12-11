@@ -29,6 +29,7 @@ class Game
   end
 
   def start
+    place_comp_ships
     main_menu
     # setup
     # turn
@@ -82,14 +83,27 @@ class Game
     #return to start method
   end
 
+  # def computer_coord_sample
+  #
+  # end
+  #
+  # def method_name
+  #
+  # end
+
   def place_comp_ships
+    # valid_sample_coord = []
     comp_sample = @computer_board.cells.keys.sample(@computer_cruiser.length)
-    until @computer_board.valid_placement?(@computer_cruiser, comp_sample) do
+    if @computer_board.valid_placement?(@computer_cruiser, comp_sample)
+      # valid_sample_coord << comp_sample
+      # require "pry"; binding.pry
       @computer_board.cells.keys.sample(@computer_cruiser.length)
       #computer place method
     else
       place_comp_ships
+      require "pry"; binding.pry
     end
+    # require "pry"; binding.pry
   end
 
   # def place_comp_ships
