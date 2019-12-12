@@ -83,14 +83,6 @@ class Game
     #return to start method
   end
 
-  # def computer_coord_sample
-  #
-  # end
-  #
-  # def method_name
-  #
-  # end
-
   def place_comp_ships
     # valid_sample_coord = []
     comp_sample = @computer_board.cells.keys.sample(@computer_cruiser.length)
@@ -101,25 +93,10 @@ class Game
       #computer place method
     else
       place_comp_ships
-      require "pry"; binding.pry
+      # require "pry"; binding.pry
     end
     # require "pry"; binding.pry
   end
-
-  # def place_comp_ships
-  #   set_coordinates = []
-  #   if @computer_board.valid_placement?(ship, coordinates)
-  #     @computer_board.place_ship(ship, coordinates)
-  #   else
-  #     set_coordinates = @computer_board.cells.keys.sample(ship.length)
-  #     until @computer_board.valid_placement?(ship, coordinates)
-  #       set_coordinates = @computer_board.cells.keys.sample(ship.length)
-  #     end
-  #   end
-  #   @computer_board.place_ship(ship, coordinates)
-  #   require "pry"; binding.pry
-  # end
-
 
   def turn
     #display computer board

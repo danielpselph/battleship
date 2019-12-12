@@ -4,6 +4,4 @@ class Player
   def initialize
     @player_shots = []
   end
-
-
 end

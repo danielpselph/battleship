@@ -4,5 +4,4 @@ class Computer
   def initialize
     @computer_shots = []
   end
-
 end
